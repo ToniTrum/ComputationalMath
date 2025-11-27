@@ -1,0 +1,164 @@
+\documentclass[a4paper,14pt]{extarticle}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{tikz}
+
+\doublespacing
+
+\newcommand{\circledequals}{\mathbin{\tikz \node[draw,circle,inner sep=1pt] {$=$};}}
+
+\begin{document}
+    \begin{center}
+        \textbf{\Large Доказательства подчинённости матричных, соответствующих векторной норме}
+    \end{center}
+
+    \section{Свойства подчинённой нормы:}
+
+    \begin{enumerate}
+        \item $||A|| \geq 0, ||A|| = 0 \Leftrightarrow A = O$
+        \item $||\alpha A|| = |\alpha| \cdot ||A||, \forall \alpha \in \mathbb{R}$
+        \item $||A + B|| \leq ||A|| + ||B||$
+        \item $||Ax|| \leq ||A|| \cdot ||x||, \forall x \in \mathbf{V}$
+        \item $||AB|| \leq ||A|| \cdot ||B||$
+        \item $||A^k|| \leq ||A||^k$
+        \item $||E|| = 1$
+        \item Если $A$ - диагональная, то $\displaystyle ||A|| = \max_i |a_{ii}|$
+    \end{enumerate}
+
+    \newpage
+    \section{$||A||_1$:}
+
+    $\displaystyle ||A||_1 = \max_{1 \leq j \leq n} \sum_{i = 1}^{m} |a_{ij}| \\
+    ||x||_1 = \sum_{i = 1}^{n} |x_i|$
+
+    \subsection{$||A||_1 \geq 0, ||A||_1 = 0 \Leftrightarrow A = O$}
+
+    $\displaystyle |a_{ij}| \geq 0, \forall i, j \Rightarrow \sum_{i = 1}^{m} |a_{ij}| \geq 0, \forall i \Rightarrow \max_{1 \leq j \leq n} \sum_{i = 1}^{m} |a_{ij}| = ||A||_1 \geq 0 \\
+    ||A||_1 = 0 \Leftrightarrow \max_{1 \leq j \leq n} \sum_{i = 1}^{m} |a_{ij}| = 0 \Leftrightarrow \sum_{i = 1}^{m} |a_{ij}| = 0, \forall j \Leftrightarrow |a_{ij}| = 0, \forall i, j \Leftrightarrow A = O$
+
+    \subsection{$||\alpha A|| = |\alpha| \cdot ||A||, \forall \alpha \in \mathbb{R}$}
+
+    $\displaystyle ||\alpha A||_1 = \max_{1 \leq j \leq n} \sum_{i = 1}^{m} |\alpha a_{ij}| = |\alpha| \max_{1 \leq j \leq n} \sum_{i = 1}^{m} |a_{ij}| = |\alpha| \cdot ||A||_1$
+
+    \subsection{$||A + B|| \leq ||A|| + ||B||$}
+
+    $\displaystyle ||A + B||_1 = \max_{1 \leq j \leq n} \sum_{i = 1}^{m} |a_{ij} + b_{ij}| \leq \max_{1 \leq j \leq n} \sum_{i = 1}^{m} (|a_{ij}| + |b_{ij}|) = \max_{1 \leq j \leq n} \left( \sum_{i = 1}^{m} |a_{ij}| + \sum_{i = 1}^{m} |b_{ij}| \right) \leq \max_{1 \leq j \leq n} \sum_{i = 1}^{m} |a_{ij}| + \max_{1 \leq j \leq n} \sum_{i = 1}^{m} |b_{ij}| = ||A||_1 + ||B||_1$
+
+    \subsection{$||Ax|| \leq ||A|| \cdot ||x||, \forall x \in \mathbf{V}$}
+
+    $\displaystyle ||Ax||_1 = \sum_{i = 1}^{m} \left| \sum_{j = 1}^{n} a_{ij} x_j \right| \leq \sum_{i = 1}^{m} \sum_{j = 1}^{n} |a_{ij} x_j| = \sum_{i = 1}^{m} \sum_{j = 1}^{n} |a_{ij}| |x_j| = \sum_{j = 1}^{n} \sum_{i = 1}^{m} |a_{ij}| |x_j| = \sum_{j = 1}^{n} |x_j| \sum_{i = 1}^{m} |a_{ij}| \leq \max_{1 \leq j \leq n} \sum_{i = 1}^{m} |a_{ij}| \sum_{j = 1}^{n} |x_j| = ||A||_1 \cdot ||x||_1$
+
+    \subsection{$||AB|| \leq ||A|| \cdot ||B||$}
+
+    $\displaystyle A - m \times n,\, B - n \times k,\, AB - m \times k \\
+    ||AB||_1 = \max_{1 \leq l \leq k} \sum_{i = 1}^{m} \left| \sum_{j = 1}^{n} a_{ij} b_{jl} \right| \leq \max_{1 \leq l \leq k} \sum_{i = 1}^{m} \sum_{j = 1}^{n} |a_{ij} b_{jl}| = \max_{1 \leq l \leq k} \sum_{i = 1}^{m} \sum_{j = 1}^{n} |a_{ij}| |b_{jl}| = \max_{1 \leq l \leq k} \sum_{j = 1}^{n} \sum_{i = 1}^{m} |a_{ij}| |b_{jl}| = \max_{1 \leq l \leq k} \sum_{j = 1}^{n} |b_{jl}| \sum_{i = 1}^{m} |a_{ij}| \leq \max_{1 \leq j \leq n} \sum_{i = 1}^{m} |a_{ij}| \cdot \max_{1 \leq l \leq k} \sum_{j = 1}^{n} |b_{jl}| = ||A||_1 \cdot ||B||_1 $
+
+    \subsection{$||A^k|| \leq ||A||^k$}
+
+    $||A^k||_1 = ||A A^{k - 1}||_1 \leq ||A||_1 \cdot ||A^{k - 1}||_1 = ||A||_1 \cdot ||A A^{k - 2}||_1 \leq ||A||_1^2 \cdot ||A^{k - 2}||_1 \leq \ldots \leq ||A||_1^k$
+
+    \subsection{$||E|| = 1$}
+
+    $\displaystyle ||E||_1 = \max_{1 \leq j \leq n} \sum_{i = 1}^{m} |a_{ij}| = \max_{1 \leq j \leq n} 1 = 1$
+
+    \subsection{Если $A$ - диагональная, то $\displaystyle ||A|| = \max_i |a_{ii}|$}
+
+    $\displaystyle ||A||_1 = \max_{1 \leq j \leq n} \sum_{i = 1}^{m} |a_{ij}| = \max_{1 \leq j \leq n} |a_{jj}|$
+
+    \newpage
+    \section{$||A||_{\infty}$}
+
+    $\displaystyle ||A||_{\infty} = \max_{1 \leq i \leq m} \sum_{j = 1}^{n} |a_{ij}| \\
+    ||x||_{\infty} = \max_{1 \leq i \leq n} |x_i|$
+
+    \subsection{$||A|| \geq 0, ||A|| = 0 \Leftrightarrow A = O$}
+
+    $\displaystyle |a_{ij}| \geq 0, \forall i, j \Rightarrow \sum_{j = 1}^{n} |a_{ij}| \geq 0, \forall j \Rightarrow \max_{1 \leq i \leq m} \sum_{j = 1}^{n} |a_{ij}| = ||A||_{\infty} \geq 0 \\
+    ||A||_{\infty} = 0 \Leftrightarrow \max_{1 \leq i \leq m} \sum_{j = 1}^{n} |a_{ij}| = 0 \Leftrightarrow \sum_{j = 1}^{n} |a_{ij}| = 0, \forall i \Leftrightarrow |a_{ij}| = 0, \forall i, j \Leftrightarrow A = O$
+
+    \subsection{$||\alpha A|| = |\alpha| \cdot ||A||, \forall \alpha \in \mathbb{R}$}
+
+    $\displaystyle ||\alpha A||_{\infty} = \max_{1 \leq i \leq m} \sum_{j = 1}^{n} |\alpha a_{ij}| = |\alpha| \max_{1 \leq i \leq m} \sum_{j = 1}^{n} |a_{ij}| = |\alpha| \cdot ||A||_{\infty}$
+
+    \subsection{$||A + B|| \leq ||A|| + ||B||$}
+
+    $\displaystyle ||A + B||_{\infty} = \max_{1 \leq i \leq m} \sum_{j = 1}^{n} |a_{ij} + b_{ij}| \leq \max_{1 \leq i \leq m} \sum_{j = 1}^{n} (|a_{ij}| + |b_{ij}|) = \\ \max_{1 \leq i \leq m} \left( \sum_{j = 1}^{n} |a_{ij}| + \sum_{j = 1}^{n} |b_{ij}| \right) \leq \max_{1 \leq i \leq m} \sum_{j = 1}^{n} |a_{ij}| + \max_{1 \leq i \leq m} \sum_{j = 1}^{n} |b_{ij}| = ||A||_{\infty} + ||B||_{\infty}$
+
+    \subsection{$||Ax|| \leq ||A|| \cdot ||x||, \forall x \in \mathbf{V}$}
+
+    $\displaystyle ||Ax||_{\infty} = \max_{1 \leq i \leq m} \left| \sum_{j = 1}^{n} a_{ij} x_j \right| \leq \max_{1 \leq i \leq m} \sum_{j = 1}^{n} |a_{ij} x_j| = \max_{1 \leq i \leq m} \sum_{j = 1}^{n} |a_{ij}| |x_j| \leq \max_{1 \leq j \leq n} |x_j| \cdot \max_{1 \leq i \leq m} \sum_{j = 1}^{n} |a_{ij}| = ||x||_{\infty} \cdot ||A||_{\infty}$
+
+    \subsection{$||AB|| \leq ||A|| \cdot ||B||$}
+
+    $\displaystyle A - m \times n,\, B - n \times k,\, AB - m \times k \\
+    ||AB||_{\infty} = \max_{1 \leq i \leq m} \sum_{l = 1}^{k} \left| \sum_{j = 1}^{n} a_{ij} b_{jl} \right| \leq \max_{1 \leq i \leq m} \sum_{l = 1}^{k} \sum_{j = 1}^{n} |a_{ij} b_{jl}| = \max_{1 \leq i \leq m} \sum_{l = 1}^{k} \sum_{j = 1}^{n} |a_{ij}| |b_{jl}| = \max_{1 \leq i \leq m} \sum_{j = 1}^{n} \sum_{l = 1}^{k} |a_{ij}| |b_{jl}| = \max_{1 \leq i \leq m} \sum_{j = 1}^{n} |a_{ij}| \sum_{l = 1}^{k} |b_{jl}| \leq \max_{1 \leq i \leq m} \sum_{j = 1}^{n} |a_{ij}| \cdot \max_{1 \leq j \leq n} \sum_{l = 1}^{k} |b_{jl}| = ||A||_{\infty} \cdot ||B||_{\infty} $
+
+    \subsection{$||A^k|| \leq ||A||^k$}
+
+    $||A^k||_{\infty} = ||A A^{k - 1}||_{\infty} \leq ||A||_{\infty} \cdot ||A^{k - 1}||_{\infty} = ||A||_{\infty} \cdot ||A A^{k - 2}||_{\infty} \leq ||A||_{\infty}^2 \cdot ||A^{k - 2}||_{\infty} \leq \ldots \leq ||A||_{\infty}^k$
+
+    \subsection{$||E|| = 1$}
+
+    $\displaystyle ||E||_{\infty} = \max_{1 \leq i \leq m} \sum_{j = 1}^{n} |a_{ij}| = \max_{1 \leq i \leq m} 1 = 1$
+
+    \subsection{Если $A$ - диагональная, то $\displaystyle ||A|| = \max_i |a_{ii}|$}
+
+    $\displaystyle ||A||_{\infty} = \max_{1 \leq i \leq m} \sum_{j = 1}^{n} |a_{ij}| = \max_{1 \leq i \leq m} |a_{ii}|$
+
+    \newpage
+    \section{$||A||_2$}
+
+    $\displaystyle ||A||_2 = \sqrt{\max_i \lambda_i (A^T A)} = \max_i \sigma_i (A) \\
+    ||x||_2 = \sqrt{\sum_{i = 1}^{n} x_i^2}$
+
+    \subsection{$||A|| \geq 0, ||A|| = 0 \Leftrightarrow A = O$}
+
+    $\displaystyle \sigma \geq 0 \Rightarrow \max_i \sigma_i (A) = ||A||_2 \geq 0 \\
+    ||A||_2 = \max_i \sigma_i (A) = 0 \Leftrightarrow \sigma_i = 0,\, \forall i \Leftrightarrow A = O$
+
+    \subsection{$||\alpha A|| = |\alpha| \cdot ||A||, \forall \alpha \in \mathbb{R}$}
+
+    $\displaystyle ||\alpha A||_2 = \sqrt{\max_i \lambda_i (\alpha A^T \alpha A)} = \sqrt{\max_i \lambda_i (\alpha^2 A^T A)} = \sqrt{\alpha^2 \max_i \lambda_i (A^T A)} = |\alpha| \sqrt{\max_i \lambda_i (A^T A)} = |\alpha| \cdot ||A||_2$
+
+    \subsection{$||A + B|| \leq ||A|| + ||B||$}
+
+    $\displaystyle ||A + B||_2 = \max_i \sigma_i (A + B) = \max_i \sigma_i (U_A \Sigma_A V_A^T + U_B \Sigma_B V_B^T) = \max_i \sigma_i (\Sigma_A + \Sigma_B) \leq \max_i \sigma_i (\Sigma_A) + \max_i \sigma_i (\Sigma_B) = \max_i \sigma_i (A) + \max_i \sigma_i (B) = ||A||_2 + ||B||_2$
+
+    \subsection{$||Ax|| \leq ||A|| \cdot ||x||, \forall x \in \mathbf{V}$}
+
+    $\displaystyle ||x||_2^2 = \sum_{i = 1}^{m} x_i^2 \\
+    x^T x = \sum_{i = 1}^{m} x_i^2 = ||x||_2^2 \\
+    ||Ax||_2 = (Ax)^T Ax = x^T A^T Ax \circledequals \\
+    \sqsupset \lambda_1, \lambda_2, \ldots, \lambda_n - $ собственные значения матрицы $A^T A$ \\
+    $v_1, v_2, \ldots, v_n - $ собственные векторы матрицы $A^T A$, соответствующие собственным значениям $\lambda_1, \lambda_2, \ldots, \lambda_n \Rightarrow A^T A v_i = \lambda_i v_i,\, \forall i$ \\
+    $\displaystyle x = c_1 v_1 + c_2 v_2 + \ldots + c_n v_n = \sum_{i = 1}^{n} c_i v_i,\, c_i \in \mathbb{R}, \forall i \\
+    \circledequals \left( \sum_{j = 1}^{n} c_j v_j \right)^T A^T A \left( \sum_{i = 1}^{n} c_i v_i \right) = \sum_{j = 1}^{n} \sum_{i = 1}^{n} c_j c_i v_j^T A^T A v_i = \sum_{j = 1}^{n} \sum_{i = 1}^{n} c_j c_i v_j^T \lambda_i v_i \circledequals \\
+    v_i^T v_j \neq \theta \Leftrightarrow i = j,$ так как система $\{ v_1, v_2, \ldots, v_n \} -$ ортонормированный базис, $\theta = \left( \begin{array}{c}
+        0 \\ 0 \\ \vdots \\ 0
+    \end{array} \right)$ \\
+    $\displaystyle \circledequals \sum_{j = 1}^{n} c_j c_j \lambda_j v_j^T v_j = \sum_{j = 1}^{n} \lambda_j (c_j v_j)^T (c_j v_j) = \sum_{j = 1}^{n} \lambda_j ||c_j v_j||_2^2 \leq \max_{1 \leq j \leq n} \lambda_j \sum_{j = 1}^{n} ||c_j v_j||_2^2 \\
+    ||Ax||_2 \leq \sqrt{\max_{1 \leq j \leq n} \lambda_j \sum_{j = 1}^{n} ||c_j v_j||_2^2} = \sqrt{\max_{1 \leq j \leq n} \lambda_j} \sqrt{\sum_{j = 1}^{n} ||c_j v_j||_2^2} = ||A||_2 \sqrt{\sum_{j = 1}^{n} ||c_j v_j||_2^2} \leq ||A||_2 \sum_{j = 1}^{n} \sqrt{||c_j v_j||_2^2} = ||A||_2 \sum_{j = 1}^{n} ||c_j v_j||_2 = ||A||_2 \cdot ||x||_2$
+
+    \subsection{$||AB|| \leq ||A|| \cdot ||B||$}
+
+    $\displaystyle ||AB||_2 = \max_i \sigma_i (AB) = \max_i \sigma_i ((U_A \Sigma_A V_A^T) (U_B \Sigma_B V_B^T)) = \max_i \sigma_i (\Sigma_A \Sigma_B) \leq \max_i \sigma_i (\Sigma_A) \max_i \sigma_i (\Sigma_B) = \max_i \sigma_i (A) \max_i \sigma_i (B) = ||A||_2 \cdot ||B||_2$
+
+    \subsection{$||A^k|| \leq ||A||^k$}
+
+    $||A^k||_2 = ||A A^{k - 1}||_2 \leq ||A||_2 \cdot ||A^{k - 1}||_2 = ||A||_2 \cdot ||A A^{k - 2}||_2 \leq ||A||_2^2 \cdot ||A^{k - 2}||_2 \leq \ldots \leq ||A||_2^k$
+
+    \subsection{$||E|| = 1$}
+
+    $\displaystyle ||E||_2 = \max_i \sigma_i (E) = \max_i \sigma_i (U \Sigma V^T) = \max_i \sigma_i (E E E) = \max_i 1 = 1$
+
+    \subsection{Если $A$ - диагональная, то $\displaystyle ||A|| = \max_i |a_{ii}|$}
+
+    $\displaystyle ||A||_2 = \sqrt{\max_i \lambda_i (A^T A)} = \sqrt{\max_i \lambda_i (A^2)} = \sqrt{\max_i a_{ii}^2} = \max_i |a_{ii}|$
+
+\end{document}
