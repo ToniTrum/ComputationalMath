@@ -1,0 +1,18 @@
+\documentclass[a4paper,14pt]{extarticle}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{setspace}
+
+\doublespacing
+
+\begin{document}
+    Мы имеем функцию $f(x) = x \ln(x + 2) + x^2 - 1$, необходимо исследовать метод простой итерации для нахождения положительного корня уравнения $f(x) = 0$, используя в качестве $\displaystyle \phi(x) = \frac{1 - x^2}{\ln(x + 2)}$.
+
+    Для того, что метод простой итерации сходился, необходимо выполнение условия $|\phi'(x*)| < q, 0 < q < 1$. \\
+    $\displaystyle 
+    |\phi'(x)| = \left| \frac{\displaystyle -2x \ln(x + 2) - (1 - x^2) \frac{1}{x + 2}}{\ln^2 (x + 2)} \right| \\
+    x* \approx 0.62752 \\
+    |\phi'(x*)| \approx \left| \frac{\displaystyle -2 \cdot 0.62752 \ln(2.62752) - (1 - 0.62752^2) \frac{1}{2.62752}}{\ln^2 (2.62752)} \right| \approx 1,54622 > 1 \Rightarrow$ метод простой итерации расходится для данного уравнения с данной функцией $\phi(x)$.
+\end{document}

@@ -1,0 +1,197 @@
+\documentclass[a4paper,14pt]{extarticle}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{setspace}
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\doublespacing
+
+\begin{document}
+    При применении метода бисекции мы делим отрезок $[a;b]$ по полам, считаем значения на краях и в середине и смотрим знаки. Затем выбираем тот отрезок, где у краевой точки и у срединной точки разные знаки. Так мы продолжаем до тех пор, пока не дойдём до отрезка, длина которого меньше заданного $\epsilon$.
+    
+    Так, если к примеру у $f(a)$ знак будет отрицательный, а у $f(b)$ -- положительный, то, если у $f(x_1)$ будет положительный знак, это значит, что корень $x*$ лежит на отрезке $[a;x_1]$.
+
+    \begin{center} \begin{tikzpicture}
+        % координаты
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (6,0);
+        \coordinate (X) at ($(A)!0.5!(B)$);
+        \coordinate (Y) at (2,0);
+
+        % отрезок
+        \draw[thick] (A) -- (B);
+
+        % точки
+        \fill (A) circle (2pt) node[below] {$a$};
+        \fill (B) circle (2pt) node[below] {$b$};
+        \fill (X) circle (2pt) node[below] {$x_1$};
+        \fill (Y) circle (2pt) node[below] {$x*$};
+
+        \fill (A) circle (2pt) node[above] {$-$};
+        \fill (B) circle (2pt) node[above] {$+$};
+        \fill (X) circle (2pt) node[above] {$+$};
+        \fill (Y) circle (2pt) node[above] {$0$};
+    \end{tikzpicture} \end{center}
+
+    Если у $f(x_1)$ знак будет отрицательный, то $x*$ лежит на отрезке $[x_1;b]$.
+
+    \begin{center} \begin{tikzpicture}
+        % координаты
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (6,0);
+        \coordinate (X) at ($(A)!0.5!(B)$);
+        \coordinate (Y) at (4,0);
+
+        % отрезок
+        \draw[thick] (A) -- (B);
+
+        % точки
+        \fill (A) circle (2pt) node[below] {$a$};
+        \fill (B) circle (2pt) node[below] {$b$};
+        \fill (X) circle (2pt) node[below] {$x_1$};
+        \fill (Y) circle (2pt) node[below] {$x*$};
+
+        \fill (A) circle (2pt) node[above] {$-$};
+        \fill (B) circle (2pt) node[above] {$+$};
+        \fill (X) circle (2pt) node[above] {$-$};
+        \fill (Y) circle (2pt) node[above] {$0$};
+    \end{tikzpicture} \end{center}
+
+    Аналогично будет, если у $f(a)$ знак будет положительный, а у $f(b)$ -- отрицательный.
+
+    Так мы продолжаем вычислять срединные значения $f(x_i), i = \overline{1, n}$ на выбранных отрезках, пока не будет выполнено условие $|x_n - x_{n - 1}| < \epsilon$.
+
+    Таким образом рассмотрим длины отрезков. Длина изначального отрезка $[a; b]$ будет равны $L_0^{bi} = b - a$. Тогда на первой итерации длина выбранного отрезка будет равна $\displaystyle L_1^{bi} = \frac{L_0^{bi}}{2}$. Продолжая так до $n$-ой итерации, получим $\displaystyle L_n^{bi} = \frac{L_{n - 1}^{bi}}{2} = \frac{L_{n - 2}^{bi}}{2^2} = \ldots = \frac{L_0^{bi}}{2^n} < \epsilon$.
+
+    Решая неравенство, выразим $n$:
+    \\
+    $\displaystyle 
+    \frac{L_0^{bi}}{2^n} < \epsilon \\
+    \frac{1}{2^n} < \frac{\epsilon}{L_0^{bi}} \\
+    2^n > \frac{L_0^{bi}}{\epsilon} \\
+    n > \log_2 \frac{L_0^{bi}}{\epsilon}
+    $
+
+    У нас для решения задачи выполняются вычисления значений функций в точках и сравнения знаков. По условию задачи, операция сравнения выполняется мгновенно, поэтому его можно не рассматривать. А вот вычисление значения функции выполняется за O(1). Таким образом скорость выполнения метода будет зависеть от числа операций вычисления функции.
+
+    В начале необходимо посчитать значения на концах отрезка: $f(a)$ и $f(b)$. После этого на каждой итерации необходимо вычислить значение функции в срединной точке $f(x_i)$. Тогда число операций вычисления функций будет равно $S_{bi} = n + 2$. \\
+
+    Теперь рассмотрим аналогичный метод, только теперь при делении отрезка на 3 равные части. В таком методе у нас будет 3 случая: корень расположен между точками $a$ и $x_{11}$, расположен между $x_{11}$ и $x_{12}$ и расположен между $x_{12}$ и $b$.
+
+    1 случай: \begin{center} \begin{tikzpicture}
+        % координаты
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (10,0);
+        \coordinate (X1) at ($(A)!0.33333!(B)$);
+        \coordinate (X2) at ($(A)!0.66667!(B)$);
+        \coordinate (Y) at (2,0);
+
+        % отрезок
+        \draw[thick] (A) -- (B);
+
+        % точки
+        \fill (A) circle (2pt) node[below] {$a$};
+        \fill (B) circle (2pt) node[below] {$b$};
+        \fill (X1) circle (2pt) node[below] {$x_{11}$};
+        \fill (X2) circle (2pt) node[below] {$x_{12}$};
+        \fill (Y) circle (2pt) node[below] {$x*$};
+
+        \fill (A) circle (2pt) node[above] {$-$};
+        \fill (B) circle (2pt) node[above] {$+$};
+        \fill (X1) circle (2pt) node[above] {$+$};
+        \fill (X2) circle (2pt) node[above] {$+$};
+        \fill (Y) circle (2pt) node[above] {$0$};
+    \end{tikzpicture} \end{center}
+
+    2 случай: \begin{center} \begin{tikzpicture}
+        % координаты
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (10,0);
+        \coordinate (X1) at ($(A)!0.33333!(B)$);
+        \coordinate (X2) at ($(A)!0.66667!(B)$);
+        \coordinate (Y) at (5,0);
+
+        % отрезок
+        \draw[thick] (A) -- (B);
+
+        % точки
+        \fill (A) circle (2pt) node[below] {$a$};
+        \fill (B) circle (2pt) node[below] {$b$};
+        \fill (X1) circle (2pt) node[below] {$x_{11}$};
+        \fill (X2) circle (2pt) node[below] {$x_{12}$};
+        \fill (Y) circle (2pt) node[below] {$x*$};
+
+        \fill (A) circle (2pt) node[above] {$-$};
+        \fill (B) circle (2pt) node[above] {$+$};
+        \fill (X1) circle (2pt) node[above] {$-$};
+        \fill (X2) circle (2pt) node[above] {$+$};
+        \fill (Y) circle (2pt) node[above] {$0$};
+    \end{tikzpicture} \end{center}
+
+    3 случай: \begin{center} \begin{tikzpicture}
+        % координаты
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (10,0);
+        \coordinate (X1) at ($(A)!0.33333!(B)$);
+        \coordinate (X2) at ($(A)!0.66667!(B)$);
+        \coordinate (Y) at (8,0);
+
+        % отрезок
+        \draw[thick] (A) -- (B);
+
+        % точки
+        \fill (A) circle (2pt) node[below] {$a$};
+        \fill (B) circle (2pt) node[below] {$b$};
+        \fill (X1) circle (2pt) node[below] {$x_{11}$};
+        \fill (X2) circle (2pt) node[below] {$x_{12}$};
+        \fill (Y) circle (2pt) node[below] {$x*$};
+
+        \fill (A) circle (2pt) node[above] {$-$};
+        \fill (B) circle (2pt) node[above] {$+$};
+        \fill (X1) circle (2pt) node[above] {$-$};
+        \fill (X2) circle (2pt) node[above] {$-$};
+        \fill (Y) circle (2pt) node[above] {$0$};
+    \end{tikzpicture} \end{center}
+
+    Аналогично будет, если у $f(a)$ знак будет положительный, а у $f(b)$ -- отрицательный.
+
+    Так мы продолжаем значения $f(x_i), i = \overline{1, m}$ на выбранных отрезках, пока не будет выполнено условие $|x_m - x_{m - 1}| < \epsilon$, где $x_i$ может быть $x_{i1}$ или $x_{i2}$ в зависимости от случая.
+
+    Таким образом рассмотрим длины отрезков. Длина изначального отрезка $[a; b]$ будет равны $L_0^{tri} = b - a$. Тогда на первой итерации длина выбранного отрезка будет равна $\displaystyle L_1^{tri} = \frac{L_0^{tri}}{3}$. Продолжая так до $m$-ой итерации, получим $\displaystyle L_m^{tri} = \frac{L_{m - 1}^{tri}}{3} = \frac{L_{m - 2}^{tri}}{3^2} = \ldots = \frac{L_0^{tri}}{3^m} < \epsilon$.
+
+    Решая неравенство, выразим $m$:
+    \\
+    $\displaystyle 
+    \frac{L_0^{tri}}{3^m} < \epsilon \\
+    \frac{1}{3^m} < \frac{\epsilon}{L_0^{tri}} \\
+    3^m > \frac{L_0^{tri}}{\epsilon} \\
+    m > \log_3 \frac{L_0^{tri}}{\epsilon}
+    $
+
+    У нас для решения задачи выполняются вычисления значений функций в точках и сравнения знаков. По условию задачи, операция сравнения выполняется мгновенно, поэтому его можно не рассматривать. А вот вычисление значения функции выполняется за O(1). Таким образом скорость выполнения метода будет зависеть от числа операций вычисления функции.
+
+    В начале необходимо посчитать значения на концах отрезка: $f(a)$ и $f(b)$. После этого на каждой итерации необходимо вычислить значение функции на первой и второй третьих отрезка $f(x_{i1})$ и $f(x_{i2})$. Тогда число операций вычисления функций будет равно $S_{tri} = 2m + 2$. \\
+
+    Чтобы понять, какой метод будет быстрее сходиться, необходимо сравнить число операций: \\
+    $\displaystyle
+    \begin{array}{ccc}
+        S_{bi} & ? & S_{tri} \\
+        n + 2 & ? & 2m + 2 \\
+        n & ? & 2m \\
+        \displaystyle \log_2 \frac{L_0^{bi}}{\epsilon} & ? & \displaystyle 2 \log_3 \frac{L_0^{tri}}{\epsilon} \\
+        \displaystyle \log_2 \frac{b - a}{\epsilon} & ? & \displaystyle 2 \log_3 \frac{b - a}{\epsilon} \\
+        \displaystyle \frac{\displaystyle \ln \frac{b - a}{\epsilon}}{\ln 2} & ? & \displaystyle 2 \frac{\displaystyle \ln \frac{b - a}{\epsilon}}{\ln 3} \\
+        \displaystyle \frac{1}{\ln 2} & ? & \displaystyle 2 \frac{1}{\ln 3} \\
+        \displaystyle \frac{1}{2 \ln 2} & ? & \displaystyle \frac{1}{\ln 3} \\
+        \displaystyle \frac{1}{ln 2^2} & ? & \displaystyle \frac{1}{\ln 3} \\
+        \displaystyle \frac{1}{\ln 4} & < & \displaystyle \frac{1}{\ln 3} \Rightarrow S_{bi} < S_{tri} \\
+    \end{array}, \,\,\,
+    \log_a b = \frac{\log_c b}{\log_c a}, c \neq 1
+    $ \\
+
+    Таким образом получаем, что метод бисекции быстрее, чем метод трёх отрезков.
+\end{document}
