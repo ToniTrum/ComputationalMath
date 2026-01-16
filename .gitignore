@@ -3,6 +3,7 @@
 *.acn
 *.acr
 *.alg
+*.atfi
 *.aux
 *.bak
 *.bbl
@@ -46,3 +47,4 @@
 .bak 
 .mtc
 build/
+_minted/
