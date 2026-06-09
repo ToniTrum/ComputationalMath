@@ -1,0 +1,188 @@
+\documentclass[a4paper,14pt]{extarticle}
+
+\usepackage[left=30mm, right=10mm, top=20mm, bottom=20mm]{geometry}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\usepackage{graphicx}
+\usepackage{setspace}
+
+\usepackage{minted}
+\usepackage{xcolor}
+
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{tempora}
+\usepackage{type1cm}
+\usepackage{indentfirst}
+
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[hidelinks]{hyperref}
+\usepackage[russian]{cleveref}
+\usepackage{bookmark}
+
+\usepackage{csquotes}
+\usepackage[
+    parentracker=true,
+    backend=biber,
+    style=gost-numeric,
+    sorting=nty
+]{biblatex}
+
+\pgfplotsset{compat=1.18}
+
+\onehalfspacing
+
+\renewcommand{\theFancyVerbLine}{%
+	\sffamily\small\color{black}\arabic{FancyVerbLine}%
+}
+
+\definecolor{codebg}{rgb}{0.12,0.12,0.14}
+\definecolor{codeframe}{rgb}{0.40,0.40,0.45}
+\definecolor{keywordcolor}{rgb}{0.45,0.65,1.0}
+\definecolor{stringcolor}{rgb}{1.0,0.55,0.45}
+\definecolor{commentcolor}{rgb}{0.55,0.75,0.60}
+\definecolor{textcolor}{rgb}{0.90,0.90,0.90}
+
+\setminted{
+    bgcolor=codebg,
+	fillcolor=codebg,
+	framesep=1em,
+	frame=single,
+    rulecolor=\color{codeframe},
+    fontsize=\normalsize,
+    baselinestretch=1.1,
+    linenos,
+    numbersep=6pt,
+    tabsize=4,
+    breaklines,
+    breakbytoken,
+	breaksymbolleft={},
+    autogobble,
+    showspaces=false,
+    showtabs=false,
+}
+
+\usemintedstyle{lightbulb}
+\setmintedinline{
+    bgcolor=codebg
+}
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{8pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
+
+\newcommand{\circledequals}{\mathbin{\tikz \node[draw,circle,inner sep=1pt] {$=$};}}
+
+\addbibresource{bibliography.bib}
+
+\begin{document}
+    \begin{titlepage}
+		\centering
+		
+		\includegraphics{images/FEFU-logo.jpg}\\
+		МИНИСТЕРСТВО ОБРАЗОВАНИЯ И НАУКИ РОССИЙСКОЙ ФЕДЕРАЦИИ\\
+		Федеральное государственное автономное образовательное учреждение высшего образования\\
+		\textbf{«Дальневосточный федеральный университет»}
+
+		\rule{\linewidth}{0.8mm}\\[0.3cm]
+		
+		\textbf{ИНСТИТУТ МАТЕМАТИКИ И КОМПЬЮТЕРНЫХ ТЕХНОЛОГИЙ}\\
+		\textbf{Кафедра математического и компьютерного моделирования}\\
+		\vspace*{0.9cm}
+		
+		Кулахсзян Сергей Грайрович\\
+        \vspace*{0.3cm}
+
+		ЛАБОРАТОРНАЯ РАБОТА № 6 \\
+        ВАРИАНТ № 10 \\
+		\vspace*{0.5cm}
+
+		\textbf{МЕТОД СПЛАЙН-КОЛЛОКАЦИИ С ИСПОЛЬЗОВАНИЕМ КУБИЧЕСКИХ B-СПЛАЙНОВ}\\
+		\vspace*{0.5cm}
+
+		Направление подготовки 02.03.01сцт Сквозные цифровые технологии,\\ 
+        бакалавриатская программа «Математика и компьютерные науки»\\ 
+        Очной формы обучения\\
+		\vspace{1.5cm}
+
+		
+		\vfill
+		\centering
+		г. Владивосток\\
+		2026
+	\end{titlepage}
+
+    \tableofcontents
+
+	\newpage
+    \section{Постановка задачи}
+    Необходимо решить краевую задачу следующего вида:
+    \begin{equation} \label{boundry_problem}
+        \begin{cases}
+            Lu \equiv u'' + p(x) u' + q(x) u = f(x), & 0 < x < 1 \\
+            l_0 \equiv \alpha_1 u(0) + \beta_1 u'(0) = \gamma_1 \\
+            l_1 \equiv \alpha_2 u(1) + \beta_2 u'(1) = \gamma_2
+        \end{cases}
+    \end{equation}
+
+    В моём варианте краевая задач (\ref{boundry_problem}) имеет вид:
+    \begin{equation} \label{my_problem}
+        \begin{cases} \displaystyle
+        u'' - \frac{3}{(x + 1)^2} u = \frac{-1,5}{\sqrt{x + 1}}, & 0 < x < 1 \\
+        3u(0) - u'(0) = 1\\
+        u'(1) = \sqrt{2}
+    \end{cases}
+    \end{equation}
+
+    Система (\ref{my_problem}) имеет точное решение, которое равняется:
+    \begin{equation} \label{exact_solution}
+        \displaystyle u(x) = \frac{2}{3} (x + 1)^{\frac{3}{2}}
+    \end{equation}
+
+    Необходимо решить уравнение (\ref{my_problem}), используя метод сплайн-коллокации с применением кубического B-сплайна, и сравнить полученное численное решение с точным (\ref{exact_solution}).
+
+    \newpage
+    \section{Теоретическая часть}
+    \subsection{Определение B-сплайна}
+
+    B-сплайн -- сплайн-функция, имеющая наименьший носитель для заданной степени \cref{B-spline}.
+    Форма базисной функции определяется расположением узлов.
+    Базисный сплайн степени $p$ $B_{i, p}(x)$ имеет следующий вид:
+    \begin{equation*}
+        B_{i, p}(x) \begin{cases}
+            > 0, & x \in [x_{i}; x_{i + p + 1}) \\
+            0, & x \notin [x_{i}; x_{i + p + 1})
+        \end{cases}
+    \end{equation*}
+
+    Одним из способов определения B-сплайна является использование формулы Кокса-де Бура \cref{Koks-de_bur}: \\
+    \begin{equation} \label()
+        \begin{gathered}
+            B_{i, 0}(x) = \begin{cases}
+                1, & x \in [x_i; x_{i + 1}) \\
+                0, & x \notin [x_i; x_{i + 1})
+            \end{cases} \\
+            \displaystyle B_{i, p}(x) = \frac{x - x_i}{x_{i + p} - x_i} B_{i, p - 1}(x) + \frac{t_{i + p + 1} - x}{t_{i + p + 1} - t_{i + 1}} B_{i + 1, p - 1} (x)
+        \end{gathered}
+    \end{equation}
+
+    Исходя из формулы
+
+    \newpage
+    \phantomsection
+    \addcontentsline{toc}{section}{Список литературы}
+    \printbibliography[title={Список литературы}]
+
+\end{document}
