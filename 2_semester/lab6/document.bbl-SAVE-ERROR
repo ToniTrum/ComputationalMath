@@ -16,5 +16,111 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{B-spline}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=20611e934261298f5f6606ff791be2e3}{%
+           family={Википедия},
+           familyi={В\bibinitperiod}}}%
+      }
+      \strng{namehash}{20611e934261298f5f6606ff791be2e3}
+      \strng{fullhash}{20611e934261298f5f6606ff791be2e3}
+      \strng{fullhashraw}{20611e934261298f5f6606ff791be2e3}
+      \strng{bibnamehash}{20611e934261298f5f6606ff791be2e3}
+      \strng{authorbibnamehash}{20611e934261298f5f6606ff791be2e3}
+      \strng{authornamehash}{20611e934261298f5f6606ff791be2e3}
+      \strng{authorfullhash}{20611e934261298f5f6606ff791be2e3}
+      \strng{authorfullhashraw}{20611e934261298f5f6606ff791be2e3}
+      \field{extraname}{1}
+      \field{sortinit}{В}
+      \field{sortinithash}{769561dacf0468c568f33adb4926797c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{online}
+      \field{title}{B-сплайн}
+      \verb{urlraw}
+      \verb https://ru.wikipedia.org/wiki/B-%D1%81%D0%BF%D0%BB%D0%B0%D0%B9%D0%BD
+      \endverb
+      \verb{url}
+      \verb https://ru.wikipedia.org/wiki/B-%D1%81%D0%BF%D0%BB%D0%B0%D0%B9%D0%BD
+      \endverb
+    \endentry
+    \entry{Cox-de_Boer}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=20611e934261298f5f6606ff791be2e3}{%
+           family={Википедия},
+           familyi={В\bibinitperiod}}}%
+      }
+      \strng{namehash}{20611e934261298f5f6606ff791be2e3}
+      \strng{fullhash}{20611e934261298f5f6606ff791be2e3}
+      \strng{fullhashraw}{20611e934261298f5f6606ff791be2e3}
+      \strng{bibnamehash}{20611e934261298f5f6606ff791be2e3}
+      \strng{authorbibnamehash}{20611e934261298f5f6606ff791be2e3}
+      \strng{authornamehash}{20611e934261298f5f6606ff791be2e3}
+      \strng{authorfullhash}{20611e934261298f5f6606ff791be2e3}
+      \strng{authorfullhashraw}{20611e934261298f5f6606ff791be2e3}
+      \field{extraname}{2}
+      \field{sortinit}{В}
+      \field{sortinithash}{769561dacf0468c568f33adb4926797c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{online}
+      \field{title}{Алгоритм де Бура}
+      \verb{urlraw}
+      \verb https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%B4%D0%B5_%D0%91%D1%83%D1%80%D0%B0
+      \endverb
+      \verb{url}
+      \verb https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%B4%D0%B5_%D0%91%D1%83%D1%80%D0%B0
+      \endverb
+    \endentry
+    \entry{Kolobov}{inbook}{}{}
+      \name{author}{2}{}{%
+        {{hash=a44c96b171d2a68f7b0ea26492ffc77a}{%
+           family={Колобов},
+           familyi={К\bibinitperiod},
+           given={А.\bibnamedelimi Г.},
+           giveni={А\bibinitperiod\bibinitdelim Г\bibinitperiod}}}%
+        {{hash=53e33b13951ca8690c5381163c388bb2}{%
+           family={Молчанова},
+           familyi={М\bibinitperiod},
+           given={Л.\bibnamedelimi А.},
+           giveni={Л\bibinitperiod\bibinitdelim А\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=60ed4b736548d278ea6698f9dac8d868}{%
+           family={Гурова},
+           familyi={Г\bibinitperiod},
+           given={Л.\bibnamedelimi М.},
+           giveni={Л\bibinitperiod\bibinitdelim М\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Издательство Дальневосточного университета}%
+      }
+      \strng{namehash}{a01094ed4fb8817baf136db46ac1573b}
+      \strng{fullhash}{a01094ed4fb8817baf136db46ac1573b}
+      \strng{fullhashraw}{a01094ed4fb8817baf136db46ac1573b}
+      \strng{bibnamehash}{a01094ed4fb8817baf136db46ac1573b}
+      \strng{authorbibnamehash}{a01094ed4fb8817baf136db46ac1573b}
+      \strng{authornamehash}{a01094ed4fb8817baf136db46ac1573b}
+      \strng{authorfullhash}{a01094ed4fb8817baf136db46ac1573b}
+      \strng{authorfullhashraw}{a01094ed4fb8817baf136db46ac1573b}
+      \strng{editorbibnamehash}{60ed4b736548d278ea6698f9dac8d868}
+      \strng{editornamehash}{60ed4b736548d278ea6698f9dac8d868}
+      \strng{editorfullhash}{60ed4b736548d278ea6698f9dac8d868}
+      \strng{editorfullhashraw}{60ed4b736548d278ea6698f9dac8d868}
+      \field{sortinit}{К}
+      \field{sortinithash}{007824ff2af181c6f6762379475efd5a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{chapter}{1. Приближённые методы решения задач математической физики}
+      \field{title}{Лабораторные работы по численным методам}
+      \field{year}{2007}
+      \field{pages}{18\bibrangedash 19}
+      \range{pages}{2}
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 
